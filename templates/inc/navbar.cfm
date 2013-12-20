@@ -44,7 +44,7 @@
 							</div>
 							<div class="large-4 medium-4 columns">
 								<button type="submit" class="button expand">
-									<i class="icon-search"></i>
+									<i class="fa fa-search"></i>
 								</button>
 							</div>
 							<input type="hidden" name="display" value="search">
