@@ -1,0 +1,92 @@
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+
+  display: table;
+  /* 2 */
+
+}
+.clearfix:after {
+  clear: both;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.affix {
+  position: fixed;
+}
+#svFavoritesList h2:before {
+  font-family: "FontAwesome";
+  margin: 0 10px 0 0;
+  content: "\f004";
+}
+#svFavoritesList #favoriteList li a.remove:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f056";
+}
+#svPageTools h2:before {
+  font-family: "FontAwesome";
+  margin: 0 10px 0 0;
+  content: "\f0ad";
+}
+#svPageTools #addFavorite a:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f055";
+}
+#svPageTools #print a:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f02f";
+}
+#navEditProfile a:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f007";
+}
+#navLogout a:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f08b";
+}
+#svSearchResults .navNext a:after {
+  font-family: "FontAwesome";
+  margin: 0 0 0 5px;
+  content: "\f101";
+}
+#svSearchResults .navPrev a:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f100";
+}
+#svSearchAgain button:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f002";
+}
+#searchForm button[submit]:before {
+  font-family: "FontAwesome";
+  margin: 0 5px 0 0;
+  content: "\f002";
+}
