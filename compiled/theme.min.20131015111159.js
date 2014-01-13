@@ -1,1 +1,0 @@
-jQuery(document).ready(function(a){a("#navPrimary:first-child > li.dropdown > a.dropdown-toggle").each(function(b,c){a(this).append('<b class="caret"></b>')});a("#myTooltip").tooltip()});
