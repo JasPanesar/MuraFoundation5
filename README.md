@@ -1,6 +1,5 @@
-MuraFoundation5
-===============
+# MuraFundation5
+A [Mura CMS](http://www.getmura.com) Site Bundle based on [Foundation](http://foundation.zurb.com/), a responsive front-end framework.
 
-Mura theme based on the Foundation front-end framework by Zurb.
-
-Mura bundle located here: https://github.com/blueriver/MuraFoundation5Bundle
+## Site Bundle
+A site bundle is available at https://github.com/blueriver/MuraFoundation5Bundle. Follow the instructions located in the README.md file.
