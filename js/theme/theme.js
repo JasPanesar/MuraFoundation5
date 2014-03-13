@@ -4,6 +4,7 @@ jQuery(document).ready(function($) {
 	$('#navPrimary:first-child > li.dropdown > a.dropdown-toggle').each(function(index, element) {
 		$(this).append('<b class="caret"></b>');
 	});
-	$('#myTooltip').tooltip();
+
+	//$('#myTooltip').tooltip();
 
 });

@@ -1,58 +1,5 @@
 <!---
-	This file is part of Mura CMS.
-
-	Mura CMS is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, Version 2 of the License.
-
-	Mura CMS is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with Mura CMS. If not, see <http://www.gnu.org/licenses/>.
-
-	Linking Mura CMS statically or dynamically with other modules constitutes 
-	the preparation of a derivative work based on Mura CMS. Thus, the terms 
-	and conditions of the GNU General Public License version 2 ("GPL") cover 
-	the entire combined work.
-
-	However, as a special exception, the copyright holders of Mura CMS grant 
-	you permission to combine Mura CMS with programs or libraries that are 
-	released under the GNU Lesser General Public License version 2.1.
-
-	In addition, as a special exception, the copyright holders of Mura CMS 
-	grant you permission to combine Mura CMS with independent software modules 
-	(plugins, themes and bundles), and to distribute these plugins, themes and 
-	bundles without Mura CMS under the license of your choice, provided that 
-	you follow these specific guidelines: 
-
-	Your custom code 
-
-	• Must not alter any default objects in the Mura CMS database and
-	• May not alter the default display of the Mura CMS logo within Mura CMS and
-	• Must not alter any files in the following directories:
-
-		/admin/
-		/tasks/
-		/config/
-		/requirements/mura/
-		/Application.cfc
-		/index.cfm
-		/MuraProxy.cfc
-
-	You may copy and distribute Mura CMS with a plug-in, theme or bundle that 
-	meets the above guidelines as a combined work under the terms of GPL for 
-	Mura CMS, provided that you include the source code of that other code when 
-	and as the GNU GPL requires distribution of source code.
-
-	For clarity, if you create a modified version of Mura CMS, you are not 
-	obligated to grant this special exception for your modified version; it is 
-	your choice whether to do so, or to make such modified version available 
-	under the GNU General Public License version 2 without this exception.  You 
-	may, if you choose, apply this exception to your own modified versions of 
-	Mura CMS.
+	This file is part of the MuraFoundation5 Theme
 --->
 <cfcomponent extends="mura.cfobject">
 
@@ -190,7 +137,7 @@
 		// dsp_edit_profile.cfm
 		this.editProfileWrapperClass="mura-EditProfile";
 		this.editProfileFormClass="";
-		this.editProfileFormGroupWrapperClass="";
+		this.editProfileFormGroupWrapperClass="row";
 		this.editProfileFieldLabelClass="large-3 columns";
 		this.editProfileFormFieldsWrapperClass="large-9 columns";
 		this.editProfileFormFieldsClass="";
@@ -357,6 +304,7 @@
 		<cfargument name="interval" type="any" default="5000" hint="Use either milliseconds OR use 'false' to NOT auto-advance to next slide." />
 		<cfargument name="autoStart" type="boolean" default="true" />
 		<cfargument name="bullets" type="boolean" default="true" />
+		<cfargument name="showSummary" type="boolean" default="false" />
 		<cfscript>
 			var local = {};
 			local.imageArgs = {};
@@ -378,6 +326,61 @@
 			<cfset local.feed = variables.$.getBean('feed').loadBy(name=arguments.feedName)>
 			<cfset local.iterator = local.feed.getIterator()>
 			<cfif local.iterator.hasNext()>
+				<div id="#arguments.cssID#">
+					<!--- Wrapper for slides --->
+					<ul data-orbit>
+						<cfset local.iterator.reset()>
+						<cfset local.idx = 0>
+						<cfloop condition="local.iterator.hasNext()">
+							<cfset local.item=iterator.next()>
+							<cfif ListFindNoCase('jpg,jpeg,gif,png', ListLast(local.item.getImageURL(), '.'))>
+								<li>
+									<img src="#local.item.getImageURL(argumentCollection=local.imageArgs)#" alt="#HTMLEditFormat(local.item.getTitle())#">
+									<cfif arguments.showCaption>
+											<div class="orbit-caption">
+												<div class="large-offset-1 large-10">
+													<h3><a href="#local.item.getURL()#">#HTMLEditFormat(local.item.getTitle())#</a></h3>
+													<cfif YesNoFormat(arguments.showSummary)>
+														#local.item.getSummary()#
+														<a class="small button" href="#local.item.getURL()#">Read More</a>
+													</cfif>
+												</div>
+											</div>
+									</cfif>
+								</li>
+								<cfset local.idx++>
+							</cfif>
+						</cfloop>
+					</ul>
+
+					<cfif local.idx>
+						<!--- Controls --->
+						<cfif local.idx gt 1>
+							<a class="left carousel-control" href="###arguments.cssID#" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="right carousel-control" href="###arguments.cssID#" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+						</cfif>
+					<cfelse>
+						<div class="alert alert-info alert-block">
+							<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+							<h4>Oh snap!</h4>
+							Your feed has no items <em>with images</em>.
+						</div>
+					</cfif>
+				</div>
+			<cfelse>
+				<div class="alert alert-info alert-block">
+					<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
+					<h4>Heads up!</h4>
+					Your feed has no items.
+				</div>
+			</cfif>
+			<!--- // END: Bootstrap Carousel --->
+		</cfoutput></cfsavecontent>
+
+		<cfset local.iterator.reset() />
+		<cfif local.iterator.hasNext()>
+			<!--- This script needs to be added just before the closing 'body' tag --->
+			<cfsavecontent variable="local.htmlfoot"><cfoutput>
 				<script>
 					$(document).foundation({
 						orbit: {
@@ -412,74 +415,10 @@
 						 }
 					});
 				</script>
-				<div id="#arguments.cssID#">
+			</cfoutput></cfsavecontent>
+			<cfset $.event('htmlfoot', $.event('htmlfoot') & local.htmlfoot) />
+		</cfif>
 
-					<!--- Indicators --->
-					<!---
-<cfif arguments.showIndicators>
-						<ol class="carousel-indicators">
-							<cfset local.iterator.reset()>
-							<cfset local.idx = 0>
-							<cfloop condition="local.iterator.hasNext()">
-								<cfset local.item=iterator.next()>
-								<cfif ListFindNoCase('jpg,jpeg,gif,png', ListLast(local.item.getImageURL(), '.'))>
-									<li data-target="###arguments.cssID#" data-slide-to="#idx#" class="<cfif local.idx eq 0>active</cfif>"></li>
-									<cfset local.idx++>
-								</cfif>
-							</cfloop>
-						</ol>
-					</cfif>
---->
-
-					<!--- Wrapper for slides --->
-					<ul data-orbit>
-						<cfset local.iterator.reset()>
-						<cfset local.idx = 0>
-						<cfloop condition="local.iterator.hasNext()">
-							<cfset local.item=iterator.next()>
-							<cfif ListFindNoCase('jpg,jpeg,gif,png', ListLast(local.item.getImageURL(), '.'))>
-								<li>
-									<img src="#local.item.getImageURL(argumentCollection=local.imageArgs)#" alt="#HTMLEditFormat(local.item.getTitle())#">
-									<cfif arguments.showCaption>
-											<div class="orbit-caption">
-												<div class="large-offset-1 large-10">
-													<h3><a href="#local.item.getURL()#">#HTMLEditFormat(local.item.getTitle())#</a></h3>
-													<!---
-#local.item.getSummary()#
-													<a class="small button" href="#local.item.getURL()#">Read More</a>
---->
-												</div>
-											</div>
-									</cfif>
-								</li>
-								<cfset local.idx++>
-							</cfif>
-						</cfloop>
-					</ul>
-
-					<cfif local.idx>
-						<!--- Controls --->
-						<cfif local.idx gt 1>
-							<a class="left carousel-control" href="###arguments.cssID#" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-							<a class="right carousel-control" href="###arguments.cssID#" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-						</cfif>
-					<cfelse>
-						<div class="alert alert-info alert-block">
-							<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-							<h4>Oh snap!</h4>
-							Your feed has no items <em>with images</em>.
-						</div>
-					</cfif>
-				</div>
-			<cfelse>
-				<div class="alert alert-info alert-block">
-					<button type="button" class="close" data-dismiss="alert"><i class="icon-remove"></i></button>
-					<h4>Heads up!</h4>
-					Your feed has no items.
-				</div>
-			</cfif>
-			<!--- // END: Bootstrap Carousel --->
-		</cfoutput></cfsavecontent>
 		<cfreturn local.str />
 	</cffunction>
 

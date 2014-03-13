@@ -206,6 +206,9 @@ ol.svPager li.activeLI a {
   background: #08c;
   color: #fff;
 }
+.mura-breadcrumb {
+  padding-left: 1em;
+}
 /* CALENDAR
 ===================================== */
 .mura-Calendar {
@@ -399,50 +402,15 @@ section .mura-Index .rating {
   .mura-edit-mode body {
     margin-top: 30px;
   }
-  .navbar-wrapper {
-    margin-top: 0;
-  }
-  .navbar-wrapper .navbar {
-    border-radius: 0;
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-  .navbar-wrapper .navbar .navbar-form {
-    margin-bottom: 0;
-    padding: 1em;
-  }
-  .navbar-wrapper .navbar ul#navPrimary {
-    margin-left: -15px;
-    margin-right: -15px;
-  }
-  .navbar-wrapper .navbar ul#navPrimary .caret,
-  .navbar-wrapper .navbar ul#navPrimary ul.dropdown-menu {
-    display: none;
-  }
-  #homepage .carousel .item img {
-    max-width: 1200px;
-    min-height: 100%;
-  }
 }
 @media (min-width: 768px) {
-  header .navbar-form {
-    padding: 0;
-  }
-  #homepage .carousel {
-    margin-top: -141px;
-  }
-  #homepage .carousel .item img {
-    max-width: 1200px;
-    min-height: 100%;
-  }
+  
 }
 @media (min-width: 992px) {
   
 }
 @media (min-width: 1200px) {
-  header .navbar-form {
-    padding-right: 0;
-  }
+  
 }
 @media (max-width: 480px) {
   .mura-edit-mode body {

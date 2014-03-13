@@ -15,13 +15,13 @@
 	<!--- Foundation core CSS --->
 	<!--- <link rel="stylesheet" href="#$.siteConfig('themeAssetPath')#/assets/foundation/css/foundation.min.css"> --->
 
-	<!--- Bootstrap core CSS --->
+	<!--- Foundation core CSS --->
 	<link rel="stylesheet" href="#$.siteConfig('themeAssetPath')#/assets/foundation/css/foundation.min.css">
-	<!--- Bootstrap theme compiled below --->
+
 	<!--- Font Awesome --->
 	<link rel="stylesheet" href="#$.siteConfig('themeAssetPath')#/assets/font-awesome/css/font-awesome.css">
 	<!--- Mura CMS --->
-	<link rel="stylesheet" href="#$.siteConfig('assetPath')#/css/mura.6.1.min.css">
+	<link rel="stylesheet" href="#$.siteConfig('assetPath')#/css/mura.6.1.1.min.css">
 	
 	<!--- Open Sans Google Font --->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -40,7 +40,6 @@
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
 	<script src="#$.siteConfig('themeAssetPath')#/js/html5shiv/html5shiv.js"></script>
-	<script src="#$.siteConfig('themeAssetPath')#/assets/bootstrap/js/respond.min.js"></script>
 	<![endif]-->
 
 	<!--- jQuery --->
